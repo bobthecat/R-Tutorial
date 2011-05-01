@@ -18,7 +18,10 @@ x
 x * 2
 y <- x * 2
 1:5
-
+x <- 1:10
+# accessing what's inside x
+x[2]
+x[10]
 
 # R workspace
 # to list the content of the workspace
@@ -27,13 +30,6 @@ ls()
 rm(x)
 # to quit R
 q()
-
-
-# creating a vector
-x <- c(0, 1, 1, 2, 3, 5, 8)
-# accessing what's inside x
-x[2]
-x[10]
 
 # to obtain help and documentation on a function
 ?ls
