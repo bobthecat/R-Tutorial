@@ -12,16 +12,31 @@
 ##########################################
 ##########################################
 # R is a fancy calculator
+# numerical operation on integers
+# square
 3 * 3
+
 x <- 3
 x
+
 x * 2
+# square
+x^2
+
 y <- x * 2
 1:5
 x <- 1:10
 # accessing what's inside x
 x[2]
 x[10]
+
+# logical operation
+2 != 3
+2 != 2
+# comparison of character strings (think quotes)
+"A" != "A"
+"A" == "A"
+
 
 # R workspace
 # to list the content of the workspace
@@ -40,21 +55,6 @@ q()
 # DATA STRUCTURES AND DATA MANIPULATION
 ##########################################
 ##########################################
-## INTEGERS
-x <- 4
-# numerical operation on integers
-# square
-x^2
-# root square etc...
-sqrt(x)
-
-# logical operation
-2 != 3
-2 != 2
-# comparison of character strings (think quotes)
-"A" != "A"
-"A" == "A"
-
 ## VECTORS
 # different types data can be store in vectors
 # characters
@@ -156,20 +156,10 @@ for(i in 1:10){
 # Goal: generate the sequence of the first 50 Fibonacci numbers
 # 1, 1, 2, 3, 5, 8, 13, 21...
 # Fi = F[i-1] + F[i-1]+1
-# -1- first create an empty vector
-fib <- rep(0, 50)
-# -2- build your loop
-for(i in 1:50){
-  # The first 2 number are predefined
-  if(i <= 2){
-    fib[i] <- 1
-  }
-  else{
-    fib[i] <- fib[i-1] + fib[i-2]
-  }
-}
-# look at the results
-fib
+
+#
+# your code here
+#
 
 ##########################################
 ##########################################
@@ -195,20 +185,30 @@ detach(cars)
 # let's generate a normal distribution with mean 1 and standard devistion 1
 # This is the assumption for microarray data expression fold change
 normal <- rnorm(1000, 1)
+# histogram
+hist(normal, main = "HISTOGRAM")
+# barplots
+barplot(normal, main = "BARPLOT")
+# density
+plot(density(normal), main = "DENSITY")
+
+# combine graphics
 par(mfrow=c(1,3))
 hist(normal, main = "HISTOGRAM")
 barplot(normal, main = "BARPLOT")
 plot(density(normal), main = "DENSITY")
+# reset the graphic device
+par(mfrow=c(1,1))
 
 # BOXPLOTS
 # using the cars data set on the distance needed to stop at a certain speed.
 data(cars)
 attach(cars)
+plot(speed, dist)
 # boxplot accept formulas
 boxplot(dist ~ speed)
-# regular scatter plot
-plot(speed, dist)
 detach(cars)
+
 # another example for the gene expression of MYC in an hypothetical experiment
 myc.ctl <- rnorm(10, mean = 6, sd = 2)
 myc.drug <- rnorm(10, mean = 10, sd = 2)
@@ -224,11 +224,13 @@ boxplot(MYC ~ condition, data = experiment, col=c("tomato", "dodgerblue"))
 ##########################################
 # tab delimited file
 GSE12499 <- read.table('treatment.txt', sep='\t', header=TRUE)
-head(GSE12499)
+GSE12499
+# data are imported into data frame
+class(GSE12499)
 
 # csv file
 GSE12499 <- read.table('treatment.csv', sep=',', header=TRUE)
-head(GSE12499)
+GSE12499
 
 ##########################################
 ##########################################
@@ -243,13 +245,14 @@ t.test(MYC ~ condition, data = experiment, alternative = "two.sided")
 t.test(MYC ~ condition, data = experiment, alternative = "two.sided", var.equal = TRUE)
 
 # Equal variance test
-var.test(MYC ~ condition)
+var.test(MYC ~ condition, data = experiment)
 
 ## -2- TWO SAMPLES T-TEST NOT NORMALLY DISTRIBUTED
 # Wilcoxon test
-wilcox.test(MYC ~ condition, data = experiment, alternative = "two.sided"
+wilcox.test(MYC ~ condition, data = experiment, alternative = "two.sided")
 
 ## -3- PAIRED SAMPLE MEASUREMENT
+library(ISwR)
 attach(intake)
 intake
 # 11 women are measured twice
@@ -273,8 +276,11 @@ abline(fit)
 summary(fit)
 
 # compute the confidence intervals
-pc <- predict(fit, interval="confidence")
-matlines(waiting, pc, lty = c(0, 2, 2), col = "blue")
+pc <- predict(fit, int="c")
+
+# plot the confidence intervals
+matlines(eruptions, pc, lty = c(0, 2, 2), col = "blue")
+
 
 ## CORRELATION
 # Pearson correlation
