@@ -30,14 +30,6 @@ x <- 1:10
 x[2]
 x[10]
 
-# logical operation
-2 != 3
-2 != 2
-# comparison of character strings (think quotes)
-"A" != "A"
-"A" == "A"
-
-
 # R workspace
 # to list the content of the workspace
 ls()
@@ -61,11 +53,11 @@ q()
 x <- c("Lincoln", "Roosevelt", "Jackson")
 # numeric
 x <- 1:20
-x <- c(1, 1, 2, 3, 5, 8)
 x <- rep("A", 20)
 
 # operation on vectors
 # an operation apply to all the elements
+x <- c(1, 1, 2, 3, 5, 8)
 x - 1
 x * 2
 x^2
@@ -86,6 +78,9 @@ x
 matrix(x, ncol=2)
 # Similarly you can have a matrix with 2 rows
 matrix(x, nrow=2)
+# fill up by rows
+matrix(x, nrow=2, byrow=TRUE)
+
 
 mat <- matrix(x, ncol=2)
 
@@ -103,9 +98,11 @@ rowMeans(mat)
 
 ## DATA FRAME
 df <- data.frame(
-  fruits = c("orange", "banana", "apple", "strawberry"), 
+  fruits = c("oranges", "bananas", "apples", "strawberries"), 
   color = c("orange", "yellow", "red", "red")
 )
+
+# information on the data frame
 attributes(df)
 names(df)
 # accessing data
@@ -116,10 +113,14 @@ subset(df, color=='red')
 
 ## LIST
 my.list <- list(
-  fruits = c("orange", "banana", "apple", "strawberry"), 
+  fruits = c("oranges", "bananas", "apples", "strawberries"), 
   color = c("orange", "yellow", "red", "red")
 )
 my.list
+
+my.list$fruits
+
+my.list[1]
 
 # list can store any other object even list
 my.list <- list(
@@ -155,7 +156,7 @@ for(i in 1:10){
 # WRITE YOUR FIRST OWN FOR LOOP
 # Goal: generate the sequence of the first 50 Fibonacci numbers
 # 1, 1, 2, 3, 5, 8, 13, 21...
-# Fi = F[i-1] + F[i-1]+1
+# Fi = F[i-1] + F[i-2]
 
 #
 # your code here
@@ -214,6 +215,7 @@ myc.ctl <- rnorm(10, mean = 6, sd = 2)
 myc.drug <- rnorm(10, mean = 10, sd = 2)
 condition <- c(rep("ctl", 10),rep("drug", 10))
 experiment <- data.frame(MYC = c(myc.ctl, myc.drug), condition)
+par(mfrow=c(1,2))
 boxplot(MYC ~ condition, data = experiment)
 boxplot(MYC ~ condition, data = experiment, col=c("tomato", "dodgerblue"))
 
@@ -281,13 +283,27 @@ pc <- predict(fit, int="c")
 # plot the confidence intervals
 matlines(eruptions, pc, lty = c(0, 2, 2), col = "blue")
 
-
 ## CORRELATION
-# Pearson correlation
-cor.test(eruptions, waiting) # results similar to fitting a linear regression
+# let's consider this fake gene expression matrix
+x <- matrix(data=c(c(2,3,7,5,4), c(1,2,6,4,2), c(4,6,14,10,8)) ,nrow=3, ncol=5, byrow=T, dimnames=list(c('A','B','C'), c('A','B','C','D','E')))
+par(cex=1.5)
+plot(x[1,], type='l', ylim=c(0,15), axes=F, xlab=NA, ylab=NA)
+points(x[1,], pch=21, bg='black')
+par(new=T)
+plot(x[2,], type='l', ylim=c(0,15), axes=F, xlab=NA, ylab=NA)
+points(x[2,], pch=22, bg='black')
+par(new=T)
+plot(x[3,], type='l', ylim=c(0,15), xlab="Experiments", ylab="Gene expression")
+points(x[3,], pch=23, bg='black')
+legend('topright', legend=c("A","B","C"), pch=c(21,22,23), pt.bg='black')
 
-# Spearman rank correlation
-cor.test(eruptions, waiting, method = "spearman")
+# Pearson correlation
+cor.test(x[1,], x[2,])
+cor.test(x[1,], x[3,])
+
+# Euclidean distance
+dist(x[1:2,], method='euc')
+dist(x[c(1,3),], method='euc')
 
 ############# END #############
 
