@@ -136,13 +136,13 @@ my.list
 ##########################################
 # tab delimited files
 # download the file
-download.file("https://sites.google.com/site/appliedbioinfo/home/introduction-to-r/treatment.txt", "./treatment.txt")
-# import it
+URL <- "http://www.stanford.edu/~druau/treatment.txt"
+download.file(URL, "./treatment.txt")
 pd <- read.table("treatment.txt", sep='\t', header=TRUE)
-# check it
 pd
 # comma separated files
-download.file("https://sites.google.com/site/appliedbioinfo/home/introduction-to-r/treatment.txt", "./treatment.txt")
+URL <- "http://www.stanford.edu/~druau/treatment.csv"
+download.file(URL, "./treatment.csv")
 pd <- read.table("treatment.csv", sep=',', header=TRUE)
 pd
 
