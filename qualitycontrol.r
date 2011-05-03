@@ -40,7 +40,7 @@ qa <- function(abatch) {
 	plot(abatch.qc)
 	dev.off()
 	
-	source("/Users/druau/Desktop/Arbeit/scripts/my_img_Test.r")
+	source("./my_img_Test.r")
 	pset <- fitPLM(abatch)
 	
 	# false color image control
