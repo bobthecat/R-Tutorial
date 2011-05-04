@@ -87,7 +87,7 @@ gnames <- as.vector(unlist(as.list(mouse4302SYMBOL)))
 # build a vector of the condition you want to compare
 # here we will compare NSC to 1F iPS cells
 cl <- c(rep(0,3), rep(1,4))
-da.rp <- RP(da.eset[,c(7:10, 4:6)], cl=cl)
+da.rp <- RP(da.eset[,c(7:10, 4:6)], cl=cl, logged=TRUE, num.perm=100, plot=FALSE, rand=5432)
 
 # now we extract the genes with corrected p-value above 0.05
 r.nsc.1fipsc <- topGene(da.rp, cutoff=0.05, method="pfp",logged=TRUE,logbase=2, gene.names=gnames)
