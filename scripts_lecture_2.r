@@ -56,6 +56,36 @@ pd
 ## update teh phenoData of your data set
 pData(da) <- pd
 pData(da)
+sampleNames(da) <- pd[,1]
+
+pset <- fitPLM(da)
+
+img.Test <- function(batch,pset,x) {
+	par(mfrow = c(2,2))
+	image(batch[,x])
+	image(pset, type = "weights", which = x)
+	image(pset, type = "resids", which = x)
+	image(pset, type = "sign.resids", which = x)
+}
+
+img.Test(da, pset, 1)
+
+
+cols <- brewer.pal(12, "Set3")
+Mbox(pset, col = cols, main ="RLE (Relative Log Expression)", 
+	xlab="Assuming that the majority of the gene are not changing\n Ideally these boxes would have small spread and be centered at M=0")
+
+
+boxplot(pset, col=cols, main= "NUSE (Normalized Unscaled Standard Error)", 
+	xlab="High values of median NUSE are indicative of a problematic array")
+
+
+  RNAdeg <- AffyRNAdeg(da)
+  plotAffyRNAdeg(RNAdeg, cols=cols)
+  legend("topleft", sampleNames(da), lty=1,col=cols)
+  box()
+  
+
 
 #####################################################
 ## BACKGROUND CORRECT + NORMALIZE YOUR DATA USING RMA
