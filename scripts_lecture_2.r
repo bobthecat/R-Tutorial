@@ -32,6 +32,8 @@ system('rm GSE12499/*.tar')
 ## IMPORT THE AFFYMETRIX DATA IN R
 #####################################################
 da <- ReadAffy(celfile.path="./GSE12499/", compress=TRUE)
+# the raw Affymetrix data are stored in a AffyBatch object
+class(da)
 
 #####################################################
 ## ADDING SOME PHENODATA
@@ -53,39 +55,49 @@ download.file(URL, "./treatment.csv")
 pd <- read.table("treatment.csv", sep=',', header=TRUE)
 pd
 
-## update teh phenoData of your data set
+## update the phenoData of your data set
 pData(da) <- pd
 pData(da)
+# rename the samples with meaningful
 sampleNames(da) <- pd[,1]
 
+#####################################################
+## QUALITY ASSESSMENT
+#####################################################
+# require library
+library(affyPLM)
+# compute a PLM set from the AffyBatch object by fitting a robust linear model to the probe level data.
 pset <- fitPLM(da)
 
+# little function to plot the 4 images for visual spatial artifact detection
 img.Test <- function(batch,pset,x) {
-	par(mfrow = c(2,2))
-	image(batch[,x])
-	image(pset, type = "weights", which = x)
-	image(pset, type = "resids", which = x)
-	image(pset, type = "sign.resids", which = x)
+  par(mfrow = c(2,2))
+  image(batch[,x])
+  image(pset, type = "weights", which = x)
+  image(pset, type = "resids", which = x)
+  image(pset, type = "sign.resids", which = x)
+  par(mfrow = c(1,1))
 }
 
+# run the function for the first microarray
 img.Test(da, pset, 1)
 
 
+# RLE (Relative Log Expression)
 cols <- brewer.pal(12, "Set3")
 Mbox(pset, col = cols, main ="RLE (Relative Log Expression)", 
-	xlab="Assuming that the majority of the gene are not changing\n Ideally these boxes would have small spread and be centered at M=0")
+  xlab="Assuming that the majority of the gene are not changing\n 
+  Ideally these boxes would have small spread and be centered at M=0")
 
-
+# NUSE (Normalized Unscaled Standard Error)
 boxplot(pset, col=cols, main= "NUSE (Normalized Unscaled Standard Error)", 
-	xlab="High values of median NUSE are indicative of a problematic array")
+  xlab="High values of median NUSE are indicative of a problematic array")
 
-
-  RNAdeg <- AffyRNAdeg(da)
-  plotAffyRNAdeg(RNAdeg, cols=cols)
-  legend("topleft", sampleNames(da), lty=1,col=cols)
-  box()
-  
-
+# RNA degradation plot
+RNAdeg <- AffyRNAdeg(da)
+plotAffyRNAdeg(RNAdeg, cols=cols)
+legend("topleft", sampleNames(da), lty=1,col=cols)
+box()
 
 #####################################################
 ## BACKGROUND CORRECT + NORMALIZE YOUR DATA USING RMA
@@ -95,7 +107,7 @@ da.n <- rma(da)
 dim(da.n)
 
 #####################################################
-## EXTRACT THE NORMALIZED EXPRESSION VALUES
+## EXTRACT THE NORMALIZED EXPRESSION VALUES INTO a MATRIX
 #####################################################
 da.eset <- exprs(da.n)
 
