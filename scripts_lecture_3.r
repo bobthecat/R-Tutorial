@@ -163,6 +163,10 @@ points(x, y, col = "green", pch = 19)
 library(GOstats)
 library(mouse4302.db)
 
+# recompute the top genes with the probe ID as row labels
+r.nsc.nsc_1f <- topGene(da.rp, cutoff = 0.001, method = "pfp", 
+logged = TRUE, logbase = 2, gene.names = rownames(da.rp$AveFC))
+
 uniqueId <- mouse4302ENTREZID
 entrezUniverse <- unique(as.character(uniqueId))
 
