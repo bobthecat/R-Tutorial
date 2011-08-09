@@ -1,14 +1,14 @@
 ###################################################
 ### chunk number 1: 
 ###################################################
-#line 119 "R_programming.Rnw"
+#line 121 "R_programming.Rnw"
 options(width=60, continue=" ")
 
 
 ###################################################
 ### chunk number 2: vectors1
 ###################################################
-#line 168 "R_programming.Rnw"
+#line 170 "R_programming.Rnw"
 # characters
 x <- c("Lincoln", "Roosevelt", "Jackson")
 # access the second elment of the vector
@@ -21,7 +21,7 @@ x <- rep("A", 20)
 ###################################################
 ### chunk number 3: vector2
 ###################################################
-#line 178 "R_programming.Rnw"
+#line 180 "R_programming.Rnw"
 # operation on vectors
 # an operation apply to all the elements
 x <- c(1, 1, 2, 3, 5, 8)
@@ -34,7 +34,7 @@ x^2
 ###################################################
 ### chunk number 4: vector3
 ###################################################
-#line 188 "R_programming.Rnw"
+#line 190 "R_programming.Rnw"
 # basic functions
 mean(x)
 median(x)
@@ -46,7 +46,7 @@ summary(x)
 ###################################################
 ### chunk number 5: matrix
 ###################################################
-#line 199 "R_programming.Rnw"
+#line 201 "R_programming.Rnw"
 # Build a matrix with 2 columns
 matrix(1:20, ncol=2)
 # Similarly you can have a matrix with 2 rows
@@ -72,7 +72,7 @@ rowMeans(mat)
 ###################################################
 ### chunk number 6: data.frame
 ###################################################
-#line 224 "R_programming.Rnw"
+#line 226 "R_programming.Rnw"
 df <- data.frame(
   fruits = c("oranges", "bananas", "apples", "strawberries"), 
   color = c("orange", "yellow", "red", "red")
@@ -91,7 +91,7 @@ subset(df, color=='red')
 ###################################################
 ### chunk number 7: list
 ###################################################
-#line 242 "R_programming.Rnw"
+#line 244 "R_programming.Rnw"
 my.list <- list(
   fruits = c("oranges", "bananas", "apples", "strawberries"), 
   color = c("orange", "yellow", "red", "red")
@@ -117,7 +117,7 @@ my.list[[2]][2,]
 ###################################################
 ### chunk number 8: reshaping
 ###################################################
-#line 269 "R_programming.Rnw"
+#line 271 "R_programming.Rnw"
 library(reshape)
 # pivot file example from Digithead's Lab Notebook
 URL <- "http://www.stanford.edu/~druau/pivot_table.csv"
@@ -130,21 +130,21 @@ cast(pivot, gene ~ condition)
 ###################################################
 ### chunk number 9: install from console eval=FALSE
 ###################################################
-## #line 285 "R_programming.Rnw"
+## #line 287 "R_programming.Rnw"
 ## install.package("mypackage")
 
 
 ###################################################
 ### chunk number 10: install from terminal eval=FALSE
 ###################################################
-## #line 292 "R_programming.Rnw"
+## #line 294 "R_programming.Rnw"
 ## # R CMD INSTALL mypackage.tar.gz
 
 
 ###################################################
 ### chunk number 11: importing text files
 ###################################################
-#line 303 "R_programming.Rnw"
+#line 305 "R_programming.Rnw"
 URL <- "http://www.stanford.edu/~druau/treatment.txt"
 # download.file() download a file from the internet.
 download.file(URL, "./treatment.txt")
@@ -160,7 +160,7 @@ pd
 ###################################################
 ### chunk number 12: Excel files eval=FALSE
 ###################################################
-## #line 321 "R_programming.Rnw"
+## #line 323 "R_programming.Rnw"
 ## library(xlsx)
 ## # there are many function in this package. A help page can be found through:
 ## vignette('xlsx')
@@ -171,7 +171,7 @@ pd
 ###################################################
 ### chunk number 13: importing other format eval=FALSE
 ###################################################
-## #line 332 "R_programming.Rnw"
+## #line 334 "R_programming.Rnw"
 ## library(foreign)
 ## # to list all the function in a package
 ## ls('package:foreign')
@@ -186,17 +186,17 @@ pd
 ###################################################
 ### chunk number 14: FOR example
 ###################################################
-#line 374 "R_programming.Rnw"
+#line 376 "R_programming.Rnw"
 for(i in 1:10){
-  # do something
-  print(i)
+	# do something
+	print(i)
 }
 
 
 ###################################################
 ### chunk number 15: IF example
 ###################################################
-#line 385 "R_programming.Rnw"
+#line 387 "R_programming.Rnw"
 i <- 1
 if(i == 1){
   print("i is equal 1")
@@ -206,7 +206,7 @@ if(i == 1){
 ###################################################
 ### chunk number 16: foreach example
 ###################################################
-#line 423 "R_programming.Rnw"
+#line 425 "R_programming.Rnw"
 library(foreach)
 library(doMC)
 library(multicore)
@@ -217,7 +217,7 @@ ncore = multicore:::detectCores()
 registerDoMC(cores = ncore)
 
 results <- foreach(i = 1:10, .combine=c) %dopar% {
-  i+i
+	i+i
 }
 # displaying the results
 results
@@ -226,7 +226,7 @@ results
 ###################################################
 ### chunk number 17: apply
 ###################################################
-#line 444 "R_programming.Rnw"
+#line 446 "R_programming.Rnw"
 # Let's build a matrix with 5 rows and 5 columns.
 mat <- matrix(1:25, nrow=5, byrow=T)
 mat
@@ -239,7 +239,7 @@ apply(mat, 2, sum)
 ###################################################
 ### chunk number 18: tapply
 ###################################################
-#line 455 "R_programming.Rnw"
+#line 457 "R_programming.Rnw"
 n <- 17
 fac <- factor(rep(1:3, length = n), levels = 1:5)
 fac
@@ -252,10 +252,10 @@ tapply(1:n, fac, sum)
 ###################################################
 ### chunk number 19: simple function
 ###################################################
-#line 471 "R_programming.Rnw"
+#line 473 "R_programming.Rnw"
 Mr.euclide <- function(x, y){
-  dist <- sqrt(sum((x - y)^2))
-  return(dist)
+	dist <- sqrt(sum((x - y)^2))
+	return(dist)
 }
 x <- c(1, 1)
 y <- c(2, 2)
@@ -265,7 +265,7 @@ Mr.euclide(x, y)
 ###################################################
 ### chunk number 20: cars
 ###################################################
-#line 491 "R_programming.Rnw"
+#line 498 "R_programming.Rnw"
 library(datasets)
 data(cars)
 head(cars)
@@ -274,7 +274,7 @@ head(cars)
 ###################################################
 ### chunk number 21: fig1plot
 ###################################################
-#line 498 "R_programming.Rnw"
+#line 505 "R_programming.Rnw"
 attach(cars)
 plot(speed, dist)
 detach(cars)
@@ -283,18 +283,18 @@ detach(cars)
 ###################################################
 ### chunk number 22: fig1
 ###################################################
+#line 512 "R_programming.Rnw"
 #line 505 "R_programming.Rnw"
-#line 498 "R_programming.Rnw"
 attach(cars)
 plot(speed, dist)
 detach(cars)
-#line 506 "R_programming.Rnw"
+#line 513 "R_programming.Rnw"
 
 
 ###################################################
 ### chunk number 23: fig2plot
 ###################################################
-#line 515 "R_programming.Rnw"
+#line 522 "R_programming.Rnw"
 normal <- rnorm(1000, 1)
 par(mfrow=c(1,3))
 hist(normal, main = "HISTOGRAM")
@@ -305,20 +305,20 @@ plot(density(normal), main = "DENSITY")
 ###################################################
 ### chunk number 24: fig2
 ###################################################
-#line 524 "R_programming.Rnw"
-#line 515 "R_programming.Rnw"
+#line 531 "R_programming.Rnw"
+#line 522 "R_programming.Rnw"
 normal <- rnorm(1000, 1)
 par(mfrow=c(1,3))
 hist(normal, main = "HISTOGRAM")
 barplot(normal, main = "BARPLOT")
 plot(density(normal), main = "DENSITY")
-#line 525 "R_programming.Rnw"
+#line 532 "R_programming.Rnw"
 
 
 ###################################################
 ### chunk number 25: fig3plot
 ###################################################
-#line 534 "R_programming.Rnw"
+#line 541 "R_programming.Rnw"
 # very handy function here to "attach" a data frame to the
 # environment. Allowing to access the variable much more
 # easily 
@@ -333,8 +333,8 @@ detach(cars)
 ###################################################
 ### chunk number 26: fig3
 ###################################################
-#line 547 "R_programming.Rnw"
-#line 534 "R_programming.Rnw"
+#line 554 "R_programming.Rnw"
+#line 541 "R_programming.Rnw"
 # very handy function here to "attach" a data frame to the
 # environment. Allowing to access the variable much more
 # easily 
@@ -344,13 +344,13 @@ plot(speed, dist)
 boxplot(dist ~ speed)
 # finally we "detach" the data frame
 detach(cars)
-#line 548 "R_programming.Rnw"
+#line 555 "R_programming.Rnw"
 
 
 ###################################################
 ### chunk number 27: fig4plot
 ###################################################
-#line 557 "R_programming.Rnw"
+#line 564 "R_programming.Rnw"
 myc.ctl <- rnorm(20, mean = 6, sd = 2)
 myc.drug <- rnorm(20, mean = 10, sd = 2)
 condition <- c(rep("ctl", 10),rep("drug", 10))
@@ -363,8 +363,8 @@ boxplot(MYC ~ condition, data = experiment, col=c("tomato", "dodgerblue"))
 ###################################################
 ### chunk number 28: fig4
 ###################################################
-#line 568 "R_programming.Rnw"
-#line 557 "R_programming.Rnw"
+#line 575 "R_programming.Rnw"
+#line 564 "R_programming.Rnw"
 myc.ctl <- rnorm(20, mean = 6, sd = 2)
 myc.drug <- rnorm(20, mean = 10, sd = 2)
 condition <- c(rep("ctl", 10),rep("drug", 10))
@@ -372,20 +372,20 @@ experiment <- data.frame(MYC = c(myc.ctl, myc.drug), condition)
 par(mfrow=c(1,2))
 boxplot(MYC ~ condition, data = experiment)
 boxplot(MYC ~ condition, data = experiment, col=c("tomato", "dodgerblue"))
-#line 569 "R_programming.Rnw"
+#line 576 "R_programming.Rnw"
 
 
 ###################################################
 ### chunk number 29: venn diagram install eval=FALSE
 ###################################################
-## #line 582 "R_programming.Rnw"
+## #line 589 "R_programming.Rnw"
 ## install.packages("Vennerable", repos="http://R-Forge.R-project.org")
 
 
 ###################################################
 ### chunk number 30: venn_diagram
 ###################################################
-#line 588 "R_programming.Rnw"
+#line 595 "R_programming.Rnw"
 library(Vennerable)
 listA <- LETTERS[1:10]
 listB <- LETTERS[5:20]
@@ -397,21 +397,21 @@ plot(vv)
 ###################################################
 ### chunk number 31: venn_diagram
 ###################################################
-#line 598 "R_programming.Rnw"
-#line 588 "R_programming.Rnw"
+#line 605 "R_programming.Rnw"
+#line 595 "R_programming.Rnw"
 library(Vennerable)
 listA <- LETTERS[1:10]
 listB <- LETTERS[5:20]
 vv <- list(drug=listA, no.drug=listB)
 vv <- Venn(vv)
 plot(vv)
-#line 599 "R_programming.Rnw"
+#line 606 "R_programming.Rnw"
 
 
 ###################################################
 ### chunk number 32: googleVis_earthquakes eval=FALSE
 ###################################################
-## #line 608 "R_programming.Rnw"
+## #line 615 "R_programming.Rnw"
 ## library(googleVis)
 ## library(XML)
 ## # Get earthquake data of the last 30 days
@@ -428,7 +428,7 @@ plot(vv)
 ###################################################
 ### chunk number 33: slopegraph
 ###################################################
-#line 634 "R_programming.Rnw"
+#line 641 "R_programming.Rnw"
 table.graph <- function(df, line.col=c("grey", "black"), label.cex=1, title.cex=1, width = 6, digits = 2, rounding.method = NULL, ...) {
   xmin <- min(df)
   xmax <- max(df)
@@ -474,42 +474,42 @@ table.graph <- function(df, line.col=c("grey", "black"), label.cex=1, title.cex=
 ###################################################
 ### chunk number 34: fig_slopegraph
 ###################################################
-#line 679 "R_programming.Rnw"
+#line 686 "R_programming.Rnw"
 table.graph(WorldPhones[,1:2], label.cex=0.7, title.cex=1.2, mar=c(5, 5, 1, 5))
 
 
 ###################################################
 ### chunk number 35: welch
 ###################################################
-#line 694 "R_programming.Rnw"
+#line 701 "R_programming.Rnw"
 t.test(MYC ~ condition, data = experiment, alternative = "two.sided")
 
 
 ###################################################
 ### chunk number 36: vartest
 ###################################################
-#line 699 "R_programming.Rnw"
+#line 706 "R_programming.Rnw"
 var.test(MYC ~ condition, data = experiment)
 
 
 ###################################################
 ### chunk number 37: stu.test
 ###################################################
-#line 704 "R_programming.Rnw"
+#line 711 "R_programming.Rnw"
 t.test(MYC ~ condition, data = experiment, alternative = "two.sided", var.equal = TRUE)
 
 
 ###################################################
 ### chunk number 38: wilcox.text
 ###################################################
-#line 710 "R_programming.Rnw"
+#line 717 "R_programming.Rnw"
 wilcox.test(MYC ~ condition, data = experiment, alternative = "two.sided")
 
 
 ###################################################
 ### chunk number 39: intake1
 ###################################################
-#line 716 "R_programming.Rnw"
+#line 723 "R_programming.Rnw"
 library(ISwR)
 attach(intake)
 intake
@@ -518,21 +518,21 @@ intake
 ###################################################
 ### chunk number 40: intake2
 ###################################################
-#line 723 "R_programming.Rnw"
+#line 730 "R_programming.Rnw"
 t.test(pre, post, paired = T)
 
 
 ###################################################
 ### chunk number 41: intake3
 ###################################################
-#line 727 "R_programming.Rnw"
+#line 734 "R_programming.Rnw"
 t.test(pre, post)
 
 
 ###################################################
 ### chunk number 42: fig5plot
 ###################################################
-#line 734 "R_programming.Rnw"
+#line 741 "R_programming.Rnw"
 attach(faithful)
 plot(faithful, main="Eruption of Old Faithful",
   xlab = "Eruption time (min)",
@@ -551,8 +551,8 @@ matlines(eruptions, pc, lty = c(0, 2, 2), col = "blue")
 ###################################################
 ### chunk number 43: fig5
 ###################################################
-#line 751 "R_programming.Rnw"
-#line 734 "R_programming.Rnw"
+#line 758 "R_programming.Rnw"
+#line 741 "R_programming.Rnw"
 attach(faithful)
 plot(faithful, main="Eruption of Old Faithful",
   xlab = "Eruption time (min)",
@@ -566,13 +566,13 @@ abline(fit)
 pc <- predict(fit, int="c")
 # plot the confidence intervals
 matlines(eruptions, pc, lty = c(0, 2, 2), col = "blue")
-#line 752 "R_programming.Rnw"
+#line 759 "R_programming.Rnw"
 
 
 ###################################################
 ### chunk number 44: faithful
 ###################################################
-#line 760 "R_programming.Rnw"
+#line 767 "R_programming.Rnw"
 fit <- lm(waiting ~ eruptions)
 summary(fit)
 
@@ -580,7 +580,7 @@ summary(fit)
 ###################################################
 ### chunk number 45: fig6plot
 ###################################################
-#line 769 "R_programming.Rnw"
+#line 776 "R_programming.Rnw"
 x <- matrix(data=c(c(2,3,7,5,4), c(1,2,6,4,2), c(4,6,14,10,8)) ,nrow=3, ncol=5, byrow=T, dimnames=list(c('A','B','C'), c('A','B','C','D','E')))
 par(cex=1.5)
 plot(x[1,], type='l', ylim=c(0,15), axes=F, xlab=NA, ylab=NA)
@@ -597,8 +597,8 @@ legend('topright', legend=c("A","B","C"), pch=c(21,22,23), pt.bg='black')
 ###################################################
 ### chunk number 46: fig6
 ###################################################
-#line 784 "R_programming.Rnw"
-#line 769 "R_programming.Rnw"
+#line 791 "R_programming.Rnw"
+#line 776 "R_programming.Rnw"
 x <- matrix(data=c(c(2,3,7,5,4), c(1,2,6,4,2), c(4,6,14,10,8)) ,nrow=3, ncol=5, byrow=T, dimnames=list(c('A','B','C'), c('A','B','C','D','E')))
 par(cex=1.5)
 plot(x[1,], type='l', ylim=c(0,15), axes=F, xlab=NA, ylab=NA)
@@ -610,13 +610,13 @@ par(new=T)
 plot(x[3,], type='l', ylim=c(0,15), xlab="Experiments", ylab="Gene expression")
 points(x[3,], pch=23, bg='black')
 legend('topright', legend=c("A","B","C"), pch=c(21,22,23), pt.bg='black')
-#line 785 "R_programming.Rnw"
+#line 792 "R_programming.Rnw"
 
 
 ###################################################
 ### chunk number 47: pearson
 ###################################################
-#line 793 "R_programming.Rnw"
+#line 800 "R_programming.Rnw"
 cor.test(x[1,], x[2,])
 cor.test(x[1,], x[3,])
 
@@ -624,7 +624,7 @@ cor.test(x[1,], x[3,])
 ###################################################
 ### chunk number 48: euclidean
 ###################################################
-#line 799 "R_programming.Rnw"
+#line 806 "R_programming.Rnw"
 dist(x[1:2,], method='euc')
 dist(x[c(1,3),], method='euc')
 
