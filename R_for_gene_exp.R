@@ -20,7 +20,8 @@ library(mouse4302cdf)
 ###################################################
 ### chunk number 3: importAffy
 ###################################################
-#line 102 "R_for_gene_exp.Rnw"
+#line 107 "R_for_gene_exp.Rnw"
+library(affy)
 ## Import the Affymetrix data in R
 da <- ReadAffy(celfile.path="./GSE12499/", compress=TRUE)
 
@@ -28,7 +29,9 @@ da <- ReadAffy(celfile.path="./GSE12499/", compress=TRUE)
 ###################################################
 ### chunk number 4: pdata
 ###################################################
-#line 108 "R_for_gene_exp.Rnw"
+#line 114 "R_for_gene_exp.Rnw"
+## Information about your data
+da
 ## ADDING SOME PHENODATA
 # what are the phenoData by default
 pData(da)
@@ -39,7 +42,7 @@ sampleNames(da)
 ###################################################
 ### chunk number 5: import
 ###################################################
-#line 118 "R_for_gene_exp.Rnw"
+#line 126 "R_for_gene_exp.Rnw"
 URL <- "http://www.stanford.edu/~druau/treatment.txt"
 pd <- read.table(URL, sep='\t', header=TRUE)
 pd
@@ -48,7 +51,7 @@ pd
 ###################################################
 ### chunk number 6: pdata2
 ###################################################
-#line 125 "R_for_gene_exp.Rnw"
+#line 133 "R_for_gene_exp.Rnw"
 pData(da) <- pd
 pData(da)
 sampleNames(da) <- pd[,1]
@@ -57,14 +60,14 @@ sampleNames(da) <- pd[,1]
 ###################################################
 ### chunk number 7: pset
 ###################################################
-#line 140 "R_for_gene_exp.Rnw"
+#line 148 "R_for_gene_exp.Rnw"
 pset <- fitPLM(da)
 
 
 ###################################################
 ### chunk number 8: img.test
 ###################################################
-#line 144 "R_for_gene_exp.Rnw"
+#line 152 "R_for_gene_exp.Rnw"
 img.Test <- function(batch,pset,x) {
 	par(mfrow = c(2,2))
 	image(batch[,x])
@@ -77,7 +80,7 @@ img.Test <- function(batch,pset,x) {
 ###################################################
 ### chunk number 9: fig2plot
 ###################################################
-#line 193 "R_for_gene_exp.Rnw"
+#line 201 "R_for_gene_exp.Rnw"
 cols <- brewer.pal(12, "Set3")
 Mbox(pset, col = cols, main ="RLE (Relative Log Expression)", 
 	xlab="Assuming that the majority of the gene are not changing\n Ideally these boxes would have small spread and be centered at M=0")
@@ -86,18 +89,18 @@ Mbox(pset, col = cols, main ="RLE (Relative Log Expression)",
 ###################################################
 ### chunk number 10: fig2
 ###################################################
-#line 200 "R_for_gene_exp.Rnw"
-#line 193 "R_for_gene_exp.Rnw"
+#line 208 "R_for_gene_exp.Rnw"
+#line 201 "R_for_gene_exp.Rnw"
 cols <- brewer.pal(12, "Set3")
 Mbox(pset, col = cols, main ="RLE (Relative Log Expression)", 
 	xlab="Assuming that the majority of the gene are not changing\n Ideally these boxes would have small spread and be centered at M=0")
-#line 201 "R_for_gene_exp.Rnw"
+#line 209 "R_for_gene_exp.Rnw"
 
 
 ###################################################
 ### chunk number 11: fig3plot
 ###################################################
-#line 211 "R_for_gene_exp.Rnw"
+#line 219 "R_for_gene_exp.Rnw"
 boxplot(pset, col=cols, main= "NUSE (Normalized Unscaled Standard Error)", 
 	xlab="High values of median NUSE are indicative of a problematic array")
 
@@ -105,17 +108,17 @@ boxplot(pset, col=cols, main= "NUSE (Normalized Unscaled Standard Error)",
 ###################################################
 ### chunk number 12: fig3
 ###################################################
-#line 217 "R_for_gene_exp.Rnw"
-#line 211 "R_for_gene_exp.Rnw"
+#line 225 "R_for_gene_exp.Rnw"
+#line 219 "R_for_gene_exp.Rnw"
 boxplot(pset, col=cols, main= "NUSE (Normalized Unscaled Standard Error)", 
 	xlab="High values of median NUSE are indicative of a problematic array")
-#line 218 "R_for_gene_exp.Rnw"
+#line 226 "R_for_gene_exp.Rnw"
 
 
 ###################################################
 ### chunk number 13: fig4plot
 ###################################################
-#line 228 "R_for_gene_exp.Rnw"
+#line 236 "R_for_gene_exp.Rnw"
 RNAdeg <- AffyRNAdeg(da)
 plotAffyRNAdeg(RNAdeg, cols=cols)
 legend("topleft", sampleNames(da), lty=1, col=cols)
@@ -125,19 +128,19 @@ box()
 ###################################################
 ### chunk number 14: fig4
 ###################################################
+#line 244 "R_for_gene_exp.Rnw"
 #line 236 "R_for_gene_exp.Rnw"
-#line 228 "R_for_gene_exp.Rnw"
 RNAdeg <- AffyRNAdeg(da)
 plotAffyRNAdeg(RNAdeg, cols=cols)
 legend("topleft", sampleNames(da), lty=1, col=cols)
 box()
-#line 237 "R_for_gene_exp.Rnw"
+#line 245 "R_for_gene_exp.Rnw"
 
 
 ###################################################
 ### chunk number 15: loading agilent
 ###################################################
-#line 258 "R_for_gene_exp.Rnw"
+#line 266 "R_for_gene_exp.Rnw"
 library(Agi4x44PreProcess)
 targets <- read.targets(infile='mRNA_labelling.txt')
 
@@ -145,7 +148,7 @@ targets <- read.targets(infile='mRNA_labelling.txt')
 ###################################################
 ### chunk number 16: read Agilent data eval=FALSE
 ###################################################
-## #line 263 "R_for_gene_exp.Rnw"
+## #line 271 "R_for_gene_exp.Rnw"
 ## ## read the data in
 ## da <- read.AgilentFE(targets, makePLOT=FALSE)
 ## 
@@ -157,7 +160,7 @@ targets <- read.targets(infile='mRNA_labelling.txt')
 ###################################################
 ### chunk number 17: unspecific filtering eval=FALSE
 ###################################################
-## #line 312 "R_for_gene_exp.Rnw"
+## #line 320 "R_for_gene_exp.Rnw"
 ## ## Unspecific filtering
 ## da.f <- filter.probes(da.n,
 ##                 control=TRUE,
@@ -189,14 +192,14 @@ targets <- read.targets(infile='mRNA_labelling.txt')
 ###################################################
 ### chunk number 18: RMA
 ###################################################
-#line 392 "R_for_gene_exp.Rnw"
+#line 400 "R_for_gene_exp.Rnw"
 da.rma <- rma(da)
 
 
 ###################################################
 ### chunk number 19: exprs
 ###################################################
-#line 396 "R_for_gene_exp.Rnw"
+#line 404 "R_for_gene_exp.Rnw"
 da.eset <- exprs(da.rma)
 dim(da.eset)
 colnames(da.eset)
@@ -205,7 +208,7 @@ colnames(da.eset)
 ###################################################
 ### chunk number 20: RP
 ###################################################
-#line 424 "R_for_gene_exp.Rnw"
+#line 432 "R_for_gene_exp.Rnw"
 library(RankProd)
 cl <- c(rep(0,3), rep(1,4))
 options(width=100)
@@ -217,7 +220,7 @@ da.rp <- RP(da.eset[,c(4:6, 7:10)], cl=cl, logged=TRUE, num.perm=100, plot=FALSE
 ###################################################
 ### chunk number 21: extracting_gene
 ###################################################
-#line 435 "R_for_gene_exp.Rnw"
+#line 443 "R_for_gene_exp.Rnw"
 library(mouse4302.db)
 gnames <- as.vector(unlist(as.list(mouse4302SYMBOL)))
 r.nsc.1fipsc <- topGene(da.rp, cutoff = 0.05, method = "pfp", logged = TRUE, 
@@ -236,7 +239,7 @@ dim(r.nsc.1fipsc$Table2)
 ###################################################
 ### chunk number 22: export
 ###################################################
-#line 453 "R_for_gene_exp.Rnw"
+#line 461 "R_for_gene_exp.Rnw"
 # up reg
 x <- r.nsc.1fipsc$Table1
 # replace the fold change value by their log2 conterpart
@@ -253,7 +256,7 @@ write.table(x, file = "NSC_vs_1F_iPSC_down.txt", sep = "\t", quote = FALSE)
 ###################################################
 ### chunk number 23: gene list 2
 ###################################################
-#line 492 "R_for_gene_exp.Rnw"
+#line 500 "R_for_gene_exp.Rnw"
 library(RankProd)
 library(affy)
 cl <- c(rep(0,4), rep(1,3))
@@ -263,7 +266,7 @@ da.rp <- RP(da.eset[,c(7:10, 1:3)], cl=cl, logged=TRUE, num.perm=100, plot=FALSE
 ###################################################
 ### chunk number 24: annot_package
 ###################################################
-#line 500 "R_for_gene_exp.Rnw"
+#line 508 "R_for_gene_exp.Rnw"
 ## ANNOTATION PACKAGE
 library(mouse4302.db)
 gnames <- as.vector(unlist(as.list(mouse4302SYMBOL)))
@@ -272,7 +275,7 @@ gnames <- as.vector(unlist(as.list(mouse4302SYMBOL)))
 ###################################################
 ### chunk number 25: genes
 ###################################################
-#line 507 "R_for_gene_exp.Rnw"
+#line 515 "R_for_gene_exp.Rnw"
 r.nsc.nsc_1f <- topGene(da.rp, cutoff = 0.05, method = "pfp", logged = TRUE, logbase = 2, gene.names=gnames)
 # The genes significantly up-regulated
 head(r.nsc.nsc_1f$Table1, 20)
@@ -288,7 +291,7 @@ dim(r.nsc.nsc_1f$Table2)
 ###################################################
 ### chunk number 26: fig5plot
 ###################################################
-#line 538 "R_for_gene_exp.Rnw"
+#line 546 "R_for_gene_exp.Rnw"
 library(bioDist)
 ## Pearson correlation dissimilarity
 d <- cor.dist(t(da.eset)) # careful here don't forget to transpose your matrix
@@ -307,8 +310,8 @@ plot(hc, labels = colnames(da.eset), main = "Hier. clust. Pearson")
 ###################################################
 ### chunk number 27: fig5
 ###################################################
-#line 555 "R_for_gene_exp.Rnw"
-#line 538 "R_for_gene_exp.Rnw"
+#line 563 "R_for_gene_exp.Rnw"
+#line 546 "R_for_gene_exp.Rnw"
 library(bioDist)
 ## Pearson correlation dissimilarity
 d <- cor.dist(t(da.eset)) # careful here don't forget to transpose your matrix
@@ -322,13 +325,13 @@ hc = hclust(d, method = "average")
 plot(hc, labels = colnames(da.eset), main = "Hier. clust. Pearson", hang=-1)
 # effect of the hang = -1
 plot(hc, labels = colnames(da.eset), main = "Hier. clust. Pearson")
-#line 556 "R_for_gene_exp.Rnw"
+#line 564 "R_for_gene_exp.Rnw"
 
 
 ###################################################
 ### chunk number 28: fig6_1
 ###################################################
-#line 565 "R_for_gene_exp.Rnw"
+#line 573 "R_for_gene_exp.Rnw"
 library(graphics)
 d <- cor.dist(as.matrix(USArrests))
 
@@ -344,7 +347,7 @@ plot(hc, main = "SINGLE", hang=-1)
 ###################################################
 ### chunk number 29: fig6_2
 ###################################################
-#line 577 "R_for_gene_exp.Rnw"
+#line 585 "R_for_gene_exp.Rnw"
 hc = hclust(d, method = "complete")
 plot(hc, main = "COMPLETE", hang=-1)
 
@@ -358,8 +361,8 @@ par(mfrow = c(1,1))
 ###################################################
 ### chunk number 30: fig6_1
 ###################################################
-#line 589 "R_for_gene_exp.Rnw"
-#line 565 "R_for_gene_exp.Rnw"
+#line 597 "R_for_gene_exp.Rnw"
+#line 573 "R_for_gene_exp.Rnw"
 library(graphics)
 d <- cor.dist(as.matrix(USArrests))
 
@@ -370,14 +373,14 @@ plot(hc, main = "AVERAGE", hang = -1)
 
 hc = hclust(d, method = "single")
 plot(hc, main = "SINGLE", hang=-1)
-#line 590 "R_for_gene_exp.Rnw"
+#line 598 "R_for_gene_exp.Rnw"
 
 
 ###################################################
 ### chunk number 31: fig6_2
 ###################################################
-#line 599 "R_for_gene_exp.Rnw"
-#line 577 "R_for_gene_exp.Rnw"
+#line 607 "R_for_gene_exp.Rnw"
+#line 585 "R_for_gene_exp.Rnw"
 hc = hclust(d, method = "complete")
 plot(hc, main = "COMPLETE", hang=-1)
 
@@ -386,13 +389,13 @@ plot(hc, main = "WARD", hang=-1)
 
 # ressetting the graphic device layout to default
 par(mfrow = c(1,1))
-#line 600 "R_for_gene_exp.Rnw"
+#line 608 "R_for_gene_exp.Rnw"
 
 
 ###################################################
 ### chunk number 32: fig7plot
 ###################################################
-#line 608 "R_for_gene_exp.Rnw"
+#line 616 "R_for_gene_exp.Rnw"
 library(cluster)
 hc.d <- diana(d)
 plot(hc.d, which.plots=2, main = "DIVISIVE HIERARCHICAL CLUSTERING")
@@ -401,18 +404,18 @@ plot(hc.d, which.plots=2, main = "DIVISIVE HIERARCHICAL CLUSTERING")
 ###################################################
 ### chunk number 33: fig7
 ###################################################
+#line 624 "R_for_gene_exp.Rnw"
 #line 616 "R_for_gene_exp.Rnw"
-#line 608 "R_for_gene_exp.Rnw"
 library(cluster)
 hc.d <- diana(d)
 plot(hc.d, which.plots=2, main = "DIVISIVE HIERARCHICAL CLUSTERING")
-#line 617 "R_for_gene_exp.Rnw"
+#line 625 "R_for_gene_exp.Rnw"
 
 
 ###################################################
 ### chunk number 34: fig8plot
 ###################################################
-#line 627 "R_for_gene_exp.Rnw"
+#line 635 "R_for_gene_exp.Rnw"
 library(gplots)
 library(RColorBrewer)
 library(bioDist)
@@ -432,8 +435,8 @@ heatmap.2(as.matrix(d),
 ###################################################
 ### chunk number 35: fig8
 ###################################################
-#line 645 "R_for_gene_exp.Rnw"
-#line 627 "R_for_gene_exp.Rnw"
+#line 653 "R_for_gene_exp.Rnw"
+#line 635 "R_for_gene_exp.Rnw"
 library(gplots)
 library(RColorBrewer)
 library(bioDist)
@@ -448,13 +451,13 @@ heatmap.2(as.matrix(d),
   hclustfun=function(m){hclust(m, method="average")},
   symm=F, col=hmcol, trace='none', notecol='black', 
   denscol='black', notecex=0.8, dendrogram="column")
-#line 646 "R_for_gene_exp.Rnw"
+#line 654 "R_for_gene_exp.Rnw"
 
 
 ###################################################
 ### chunk number 36: fig9plot
 ###################################################
-#line 654 "R_for_gene_exp.Rnw"
+#line 662 "R_for_gene_exp.Rnw"
 r.nsc.nsc_1f <- topGene(da.rp, cutoff = 0.001, method = "pfp", logged = TRUE, logbase = 2, gene.names=gnames)
 heatmap.2(da.eset[r.nsc.nsc_1f$Table1[,1],], 
   distfun=function(x){as.dist(1 - cor(t(x), use = "complete.obs", method ="pearson"))}, 
@@ -466,21 +469,21 @@ heatmap.2(da.eset[r.nsc.nsc_1f$Table1[,1],],
 ###################################################
 ### chunk number 37: fig9
 ###################################################
-#line 664 "R_for_gene_exp.Rnw"
-#line 654 "R_for_gene_exp.Rnw"
+#line 672 "R_for_gene_exp.Rnw"
+#line 662 "R_for_gene_exp.Rnw"
 r.nsc.nsc_1f <- topGene(da.rp, cutoff = 0.001, method = "pfp", logged = TRUE, logbase = 2, gene.names=gnames)
 heatmap.2(da.eset[r.nsc.nsc_1f$Table1[,1],], 
   distfun=function(x){as.dist(1 - cor(t(x), use = "complete.obs", method ="pearson"))}, 
   hclustfun=function(m){hclust(m, method="average")},
   symm=F, col=hmcol, trace='none', notecol='black', 
   denscol='black', notecex=0.8, dendrogram="column")
-#line 665 "R_for_gene_exp.Rnw"
+#line 673 "R_for_gene_exp.Rnw"
 
 
 ###################################################
 ### chunk number 38: over-representation
 ###################################################
-#line 749 "R_for_gene_exp.Rnw"
+#line 757 "R_for_gene_exp.Rnw"
 library(GOstats)
 library(mouse4302.db)
 library(RankProd)
@@ -509,7 +512,7 @@ mfhyper = hyperGTest(params)
 ###################################################
 ### chunk number 39: hypergeo
 ###################################################
-#line 775 "R_for_gene_exp.Rnw"
+#line 783 "R_for_gene_exp.Rnw"
 mfhyper
 
 head(summary(mfhyper))
@@ -533,7 +536,7 @@ htmlReport(mfhyper, file="BP_list_significant.html")
 ###################################################
 ### chunk number 40: fig13plot
 ###################################################
-#line 797 "R_for_gene_exp.Rnw"
+#line 805 "R_for_gene_exp.Rnw"
 library(Rgraphviz)
 g1 <- GOGraph(head(summary(mfhyper))$GOBPID, GOBPPARENTS)
 plot(g1)
@@ -554,8 +557,8 @@ plot(g1, nodeAttrs = nodattr)
 ###################################################
 ### chunk number 41: fig13
 ###################################################
-#line 816 "R_for_gene_exp.Rnw"
-#line 797 "R_for_gene_exp.Rnw"
+#line 824 "R_for_gene_exp.Rnw"
+#line 805 "R_for_gene_exp.Rnw"
 library(Rgraphviz)
 g1 <- GOGraph(head(summary(mfhyper))$GOBPID, GOBPPARENTS)
 plot(g1)
@@ -571,13 +574,13 @@ nodattr <- makeNodeAttrs(g1, label=my.labels,
   shape = "ellipse", fillcolor = "#f2f2f2", fixedsize = FALSE)
 
 plot(g1, nodeAttrs = nodattr)
-#line 817 "R_for_gene_exp.Rnw"
+#line 825 "R_for_gene_exp.Rnw"
 
 
 ###################################################
 ### chunk number 42: PAM
 ###################################################
-#line 827 "R_for_gene_exp.Rnw"
+#line 835 "R_for_gene_exp.Rnw"
 library(cluster)
 library(lattice)
 library(bioDist)
@@ -594,7 +597,7 @@ g.pam <- pam(d, k = 3)
 ###################################################
 ### chunk number 43: fig14plot
 ###################################################
-#line 842 "R_for_gene_exp.Rnw"
+#line 850 "R_for_gene_exp.Rnw"
 x <- vector()
 for(i in 3:20){
   g.pam <- pam(d, k = i)
@@ -607,8 +610,8 @@ plot(x, xlab = 'K (cluster number requested)', ylab = 'average silhouette width'
 ###################################################
 ### chunk number 44: fig14
 ###################################################
-#line 853 "R_for_gene_exp.Rnw"
-#line 842 "R_for_gene_exp.Rnw"
+#line 861 "R_for_gene_exp.Rnw"
+#line 850 "R_for_gene_exp.Rnw"
 x <- vector()
 for(i in 3:20){
   g.pam <- pam(d, k = i)
@@ -616,13 +619,13 @@ for(i in 3:20){
 }
 
 plot(x, xlab = 'K (cluster number requested)', ylab = 'average silhouette width')
-#line 854 "R_for_gene_exp.Rnw"
+#line 862 "R_for_gene_exp.Rnw"
 
 
 ###################################################
 ### chunk number 45: fig15plot
 ###################################################
-#line 862 "R_for_gene_exp.Rnw"
+#line 870 "R_for_gene_exp.Rnw"
 g.pam <- pam(d, k = 8)
 
 # transform sub.da
